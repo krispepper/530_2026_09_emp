@@ -1,8 +1,9 @@
+import getpass
 import mysql.connector
 
 def get_connection():
     connection = mysql.connector.connect(
-        user = '', # your username goes here
+        user = getpass.getuser(), # compsci username
         password='',
         host='127.0.0.1',
         port=3306,
