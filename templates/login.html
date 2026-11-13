@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+
+<body>
+    <div class="login-container">  
+        <h1>Employee Performance Review Portal</h1>
+        <p>Please select your employee profile.</p>
+
+        <form method="POST" action="/login">
+            <!--Employee Role Selection -->
+            <label for="role">Employee Role:</label>
+            <select id="role" name="role" required>
+                <option value="">Select Role</option>
+                <option value="Auditor">Auditor</option>
+                <option value="Manager">Manager</option>
+                <option value="Employee">Employee</option>
+            </select>
+
+            <!-- Employee Name Selection -->
+            <label for="employee">Employee Name:</label>
+            <select id="employee" name="employeeID">
+                <option value="">Select Employee</option>
+                {% for employee in employees %}
+                <option value="{{ employee['employeeID'] }}" data-role="{{ employee['role'] }}">
+                    {{ employee['firstName'] }}
+                    {{ employee['lastName'] }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <button class="btn" type="submit">Continue</button>
+        </form>
+    </div>
+    
+<!-- JavaScript to handle Employee Role and Name selection -->
+    <script>
+       const roleDropdown = document.getElementById("role");
+        const employeeDropdown = document.getElementById("employee");
+
+        roleDropdown.addEventListener("change", function() {
+
+            const selectedRole = this.value;
+
+            employeeDropdown.value = "";
+
+            const employees = employeeDropdown.querySelectorAll("option");
+
+            employees.forEach(function(employee) {
+
+                if (employee.value === "") {
+                    employee.hidden = false;
+                    return;
+                }
+
+                if (employee.dataset.role === selectedRole) {
+                    employee.hidden = false;
+                } else {
+                    employee.hidden = true;
+                }
+
+            });
+
+            employeeDropdown.disabled = !selectedRole;
+
+        });
+    </script>
+  
+</body>
+</html>

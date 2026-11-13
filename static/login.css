@@ -1,0 +1,59 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f4c5c, #9fb7b6);
+    margin: 0;
+    text-align: center;
+}
+
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+h1 {
+    color: #000000;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    background: #0f4c5c;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    font-family: Arial, sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #0b2c35;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -17,16 +17,8 @@ def employees_page():
         """
     print(employees)
     
-    return f"""<html>
-    <head>
-    <title>Employee List</title>
-    </head>
-    <body>
-    <h1>Employee List</h1>
-    {employee_html}
-    </body>
-    </html>
-    """
+   
+    return render_template('login.html', employees=employees)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
