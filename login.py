@@ -1,3 +1,9 @@
+# Author: Branson Jamanram
+# Description: Creates the python flask code for employee login
+# Displays the employee login first and last name in a drop down menu
+# Along side their role which will direct them into their dashboard
+# Associated with their role
+
 from flask import Flask, render_template, request
 from queries import (get_employees, get_employeesID)
 

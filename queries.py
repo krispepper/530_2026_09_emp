@@ -1,3 +1,8 @@
+# Author: Branson Jamanram
+# Description: Creates the python code for retrieving employee information
+# This consists of employeeID, first name, last name, and role
+# Thus allowing each employee to select their information and return it 
+
 from db import get_connection
 
 def get_employees():
