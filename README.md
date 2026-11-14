@@ -9,6 +9,6 @@ Enter these command propmts to begin:
 5. source .venv/bin/activate OR .venv\Scripts\activate.bat
 6. pip freeze > requirements.txt
 7. pip install -r requirements.txt
-8. Run the application ...
+8. Run the application using python3 app.py
 
 Everyone worked collarboratively on the project as we all took designated roles in order to complete application. If one person was unsure of how to do something, we switched between tasks in order to work efficiently and fairly. After Branson created the table, Maaz started working on the code and both Branson and Cynthia worked on the readme file . This allowed the group members to maintain structure and flow throughout the work environment. Throughout the process, we decided it was best that Maaz became group leader since his knowledge of code was much stronger than the rest of us and can guide us throughout the assignment. 

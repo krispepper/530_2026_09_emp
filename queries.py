@@ -16,11 +16,11 @@ def get_employees():
 def get_employeesID(employeeID):
     sql = '''
     SELECT * FROM Employees
+    WHERE EmployeeID = %s
     '''
-    sql = sql + ' WHERE EmployeeID =' + str(employeeID)
     connection = get_connection()
     cursor = connection.cursor(dictionary=True)
-    cursor.execute(sql)
+    cursor.execute(sql, (employeeID,))
     employee = cursor.fetchone()
     cursor.close()
     connection.close()
