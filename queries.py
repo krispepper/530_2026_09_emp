@@ -12,3 +12,16 @@ def get_employees():
     cursor.close()
     connection.close()
     return employees
+
+def get_employeesID(employeeID):
+    sql = '''
+    SELECT * FROM Employees
+    '''
+    sql = sql + ' WHERE EmployeeID =' + str(employeeID)
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute(sql)
+    employee = cursor.fetchone()
+    cursor.close()
+    connection.close()
+    return employee
