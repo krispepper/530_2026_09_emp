@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 from queries import(get_employees)
+from routes.period_routes import period_bp
 
 
 app = Flask(__name__)
+app.register_blueprint(period_bp)  # /periods
 
 @app.route('/')
 def employees_page():

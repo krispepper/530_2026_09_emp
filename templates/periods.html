@@ -1,0 +1,50 @@
+<!-- Purpose: Review periods page - list all periods and a form to add one. -->
+<!-- Author: Maaz Majeed. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Periods</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='periods.css') }}">
+</head>
+<body>
+    <h1>Review Periods</h1>
+
+    {% if message %}<p class="message">{{ message }}</p>{% endif %}
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+    <h2>Set up a review period</h2>
+    <form method="POST" action="/periods">
+        <label>Period name <input type="text" name="periodName" placeholder="Fall 2026"></label>
+        <label>Start date <input type="date" name="startDate"></label>
+        <label>Deadline <input type="date" name="deadlineDate"></label>
+        <label><input type="checkbox" name="isConfidential"> Confidential (hide reviewer names)</label>
+        <label>Created by
+            <select name="createdBy">
+                <option value="">Select employee</option>
+                {% for employee in employees %}
+                <option value="{{ employee['employeeID'] }}">{{ employee['firstName'] }} {{ employee['lastName'] }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <button type="submit">Save</button>
+    </form>
+
+    <h2>All review periods</h2>
+    {% if periods %}
+    <table>
+        <tr><th>Name</th><th>Start</th><th>Deadline</th><th>Type</th><th>Status</th></tr>
+        {% for p in periods %}
+        <tr>
+            <td>{{ p.period_name }}</td>
+            <td>{{ p.start_date }}</td>
+            <td>{{ p.deadline_date }}</td>
+            <td>{{ 'Confidential' if p.is_confidential else 'Open' }}</td>
+            <td>{{ 'Closed' if p.is_closed else 'Active' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No review periods yet.</p>
+    {% endif %}
+</body>
+</html>
