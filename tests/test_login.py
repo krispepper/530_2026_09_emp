@@ -1,6 +1,10 @@
+# Author: Branson Jamanram
+# Purpose: Unit test for the login page
+
+
 import login
 
-employees = [{"employeeID": 10001, "firstName": "Test", "lastName": "Successful", "role": "Auditor"}]
+employees = [{"employeeID": 10001, "firstName": "Cynthia", "lastName": "Luizia", "role": "Auditor"}]
 
 
 def test_login_successful(monkeypatch):
