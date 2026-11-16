@@ -23,13 +23,10 @@ def login_successful():
     role = request.form['role']
     employee = get_employeesID(employeeID)
 
-    if employee["role"] == role:
-        # Employee ID needs to be converted to a string otherwise the statement will be false 
-        # 1001 ≠ "1001"
-        if str(employee["employeeID"]) == employeeID:
+    if employee and employee["role"] == role:
             return render_template("dashboard.html", employees = employees)
-        
-    return render_template("login.html", employees = employees)
+    else:
+        return render_template("login.html", employees = employees)
         
 
 if __name__ == '__main__':
