@@ -3,19 +3,21 @@
 # Displays the employee login first and last name in a drop down menu
 # Along side their role which will direct them into their dashboard
 # Associated with their role
+# Moved into a Blueprint (routes/login_routes.py) so the whole app runs from app.py.
 
-from flask import Flask, render_template, request
-from queries import (get_employees, get_employeesID)
+from flask import Blueprint, render_template, request
+from models.employee import (get_employees, get_employeesID)
 
-login = Flask(__name__)
+login_bp = Blueprint('login', __name__)
 
-@login.route("/")
+# Login page: drop-downs to pick your role and name
+@login_bp.route("/")
 def login_page():
     employees = get_employees()
-    print(employees)
     return render_template('login.html', employees = employees)
 
-@login.route("/login", methods = ['POST'])
+# Login submit: if the role matches the employee, open their dashboard
+@login_bp.route("/login", methods = ['POST'])
 def login_successful():
     employees = get_employees()
 
@@ -27,9 +29,3 @@ def login_successful():
             return render_template("dashboard.html", employees = employees)
     else:
         return render_template("login.html", employees = employees)
-        
-
-if __name__ == '__main__':
-    login.run(debug=True, port=5002)
-
-

@@ -1,7 +1,7 @@
 # Purpose: ReviewPeriod model - validates and reads/writes the ReviewPeriods table.
 # Author: Maaz Majeed.
 from datetime import date
-from db import Database
+from models.db import Database
 
 
 class ReviewPeriod:

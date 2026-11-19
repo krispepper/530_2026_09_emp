@@ -1,6 +1,6 @@
-<!-- Created by: Cynthia Luizia
-     Description: This is the login page for the Employee Performance Review Portal. 
-                  It allows employees to select their role and name to log in.--> 
+<!-- Author: Cynthia Luizia
+     Purpose: This is the login page for the Employee Performance Review Portal. 
+              It allows employees to select their role and name to log in.--> 
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
 <body>
     <div class="login-container">  
         <h1>Employee Performance Review Portal</h1>
-        <p>Please select your employee profile.</p>
+        <p>Please select your employee profile</p>
 
         <form method="POST" action="/login">
             <!--Employee Role Selection -->
@@ -41,36 +41,15 @@
     </div>
     
 <!-- JavaScript to handle Employee Role and Name selection -->
+    <script src="{{ url_for('static', filename='role-filter.js') }}"></script>
+    
     <script>
        const roleDropdown = document.getElementById("role");
-        const employeeDropdown = document.getElementById("employee");
+    const employeeDropdown = document.getElementById("employee");
 
-        roleDropdown.addEventListener("change", function() {
-
-            const selectedRole = this.value;
-
-            employeeDropdown.value = "";
-
-            const employees = employeeDropdown.querySelectorAll("option");
-
-            employees.forEach(function(employee) {
-
-                if (employee.value === "") {
-                    employee.hidden = false;
-                    return;
-                }
-
-                if (employee.dataset.role === selectedRole) {
-                    employee.hidden = false;
-                } else {
-                    employee.hidden = true;
-                }
-
-            });
-
-            employeeDropdown.disabled = !selectedRole;
-
-        });
+    roleDropdown.addEventListener("change", function() {
+        filterEmployeesByRole(this.value, employeeDropdown);
+    });  
     </script>
   
 </body>
@@ -90,5 +69,5 @@ employee role selected in another dropdown?"
 "How do I use a Jinja2 for loop to populate an HTML select dropdown with employee 
 names retrieved from a database?"
 
-I reviewed, tested, and adapted the generated guidance to work with my Flask/Jinja2 login page.
+I reviewed, tested, and adapted the generated guidance to work with my login page.
 -->
