@@ -3,9 +3,13 @@
 # This consists of employeeID, first name, last name, and role
 # Thus allowing each employee to select their information and return it 
 
-from db import get_connection
+from models.db import get_connection
 
 def get_employees():
+    """Get every employee, ordered by employeeID.
+
+    Returns: list of dicts (employeeID, firstName, lastName, role).
+    """
     sql = '''
     SELECT * FROM Employees
     ORDER BY employeeID;
@@ -19,6 +23,11 @@ def get_employees():
     return employees
 
 def get_employeesID(employeeID):
+    """Get one employee by ID.
+
+    employeeID: int or str, the employee's ID.
+    Returns: dict for that employee, or None if not found.
+    """
     sql = '''
     SELECT * FROM Employees
     WHERE EmployeeID = %s

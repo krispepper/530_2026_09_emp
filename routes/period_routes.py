@@ -3,7 +3,7 @@
 from datetime import date
 from flask import Blueprint, render_template, request
 from models.review_period import ReviewPeriod
-from queries import get_employees
+from models.employee import get_employees
 
 period_bp = Blueprint('periods', __name__)
 
@@ -20,11 +20,13 @@ def _render(message=None, error=None, status=200):
                            employees=get_employees(), message=message, error=error), status
 
 
+# Review periods page: list all periods and show the add form
 @period_bp.route('/periods')
 def list_periods():
     return _render()
 
 
+# Add form submit: save the period, or show the error message
 @period_bp.route('/periods', methods=['POST'])
 def add_period():
     name = request.form.get('periodName', '')
