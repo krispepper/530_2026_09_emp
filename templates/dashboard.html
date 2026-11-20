@@ -1,7 +1,111 @@
+<!-- Purpose: This is the dashboard page for employees to view and submit performance reviews. The page also displays employee 
+                information and allows users to view their feedback. 
+                Author: Cynthia Luizia -->
+
 <!DOCTYPE html>
-<html>
-<head><title>Dashboard</title></head>
-<body>
-    <h1>Dashboard</h1>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body id="top">
+  <header class="topbar">
+    <div class="brand">Employee Review Portal</div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="reviewSearch" type="search" placeholder="Search review cycles..." aria-label="Search review cycles">
+      </div>
+      <div class="feedback-area">
+        <button class="menu-button" id="feedbackButton" type="button" aria-label="Open feedback menu" aria-expanded="false">⋯</button>
+        <div class="dropdown" id="feedbackDropdown">
+          <h3>Feedback</h3>
+          <a href="#feedback">View my feedback</a>
+        </div>
+      </div>
+      <div class="profile-area">
+        <button class="profile-button" id="profileButton" type="button" aria-label="View employee profile" aria-expanded="false">
+          {{ (employee.firstName[0] ~ employee.lastName[0]) if employee and employee.firstName and employee.lastName else 'U' }}
+        </button>
+        <div class="dropdown" id="profileDropdown">
+          <h3>Employee profile</h3>
+          {% if employee %}
+            <p><strong>Name:</strong> {{ employee.firstName }} {{ employee.lastName }}</p>
+            <p><strong>Employee ID:</strong> {{ employee.employeeID }}</p>
+            <p><strong>Role:</strong> {{ employee.role }}</p>
+          {% else %}
+            <p>Employee information is not available.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Main navigation">
+      <a class="active" href="#top">Dashboard</a>
+      <a href="/periods">Review periods</a>
+      <a href="#feedback">My feedback</a>
+      <a href="/submit-reviews">Submit Review</a>
+    </nav>
+
+    <main>
+      <section class="welcome">
+        <div>
+          <h1>Welcome{% if employee and employee.firstName %}, {{ employee.firstName }}{% endif %}!</h1>
+          <p class="subtitle">Here you can view your review cycles and access your employee information.</p>
+        </div>
+      </section>
+
+      <div class="section-heading">
+        <h2>Review cycles</h2>
+        <a class="manage-link" href="/periods">View all periods →</a>
+      </div>
+
+      <section class="review-grid" id="reviewGrid" aria-label="Available review cycles">
+        {% if periods %}
+          {% for period in periods %}
+            <article class="review-card" data-search="{{ period.period_name|lower }} {{ 'confidential' if period.is_confidential else 'open' }}">
+              <div class="card-top">
+                <div class="review-icon" aria-hidden="true">▤</div>
+                <span class="tag">{{ 'Confidential' if period.is_confidential else 'Open' }}</span>
+              </div>
+              <h3>{{ period.period_name }}</h3>
+              <p>Start date: {{ period.start_date }}</p>
+              <p class="deadline">Deadline: <strong>{{ period.deadline_date }}</strong></p>
+              {% if period.is_closed %}
+                <span class="tag">Closed</span>
+              {% else %}
+                <button class="review-action" type="button" data-review-type="{{ 'confidential' if period.is_confidential else 'open' }}" data-period="{{ period.period_name|e }}">
+                  Submit {{ 'confidential' if period.is_confidential else 'open' }} review
+                </button>
+              {% endif %}
+            </article>
+          {% endfor %}
+        {% else %}
+          <div class="empty-state">There are currently no review cycles to display.</div>
+        {% endif %}
+      </section>
+      <p class="no-results" id="noResults">No review cycles match your search.</p>
+
+      <section class="feedback-panel" id="feedback">
+        <h2>My feedback</h2>
+        <p>Select the menu button (⋯) in the top-right corner to access your feedback.</p>
+      </section>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='dashboard.js') }}" defer></script>
 </body>
 </html>
+
+<!--
+AI Assistance Disclosure:
+Used ChatGPTas a learning resource to better understand HTML structure, elements,
+accessibility, and Jinja template integration.
+
+Prompt Used:
+"Can you explain how HTML elements such as header, nav, main, section, and article should be
+organized in a dashboard? Explain how Jinja templates work with HTML to display information from Flask."
+-->
