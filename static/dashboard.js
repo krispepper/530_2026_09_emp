@@ -1,6 +1,6 @@
-//Purpose: This file contains the JavaScript code for the dashboard page, handling dropdown menus, 
-//         search functionality, and navigation to the review submission page.
-//Author: Cynthia Luizia
+/* Purpose: This file contains the JavaScript code for the dashboard page, handling dropdown menus, 
+            search functionality, and navigation to the review submission page.
+   Author: Cynthia Luizia */
 
 // Profile and Feedback dropdown elements
 const profileButton = document.getElementById('profileButton');
