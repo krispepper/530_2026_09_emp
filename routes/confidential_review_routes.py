@@ -8,21 +8,25 @@ submit_confidential_bp = Blueprint('submit_confidential', __name__)
 def submitReview_page():
     
     reviewID = request.form['reviewID']
+    reviewerID = request.form['reviewerID']
     employeeID = request.form['employeeID']
     feedback = request.form['feedback']
     status = request.form['status']
 
-    if reviewID is None: 
-        message = models.confidential_review.submit_confidential(reviewID, employeeID, feedback, status)
+    periodID = request.form['periodID']
 
-    else:
-        message = models.confidential_review.submit_inProgress(reviewID, feedback, status)
+    if reviewID == "":
+        reviewID = None
+
+    message = confidential_review.submit_confidential(reviewID, reviewerID, employeeID, feedback, "Submitted")
 
     return message
 
-@submit_confidential_bp.route("/deleteInProgress", methods = ['POST'])
-def delete_in_Progress_page():
 
-    reviewID = request.form['reviewID']
-    message = confidential_review.delete(reviewID, None)
-    return message
+
+# @submit_confidential_bp.route("/deleteInProgress", methods = ['POST'])
+# def delete_in_Progress_page():
+
+#     reviewID = request.form['reviewID']
+#     message = confidential_review.delete(reviewID, None)
+#     return message
