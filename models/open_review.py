@@ -1,7 +1,6 @@
 # Author: Branson Jamanram
-# Description: Uses multiple functions that allow employees to
-# Submit an open review in full, save a draft, check for duplicates, reviews cant be changed,
-# and allows the review to be deleted
+# Description: Uses 2 functions that allow employees to
+# Submit an open review in full, and checks for duplicates
 
 from datetime import date
 from models.db import Database
