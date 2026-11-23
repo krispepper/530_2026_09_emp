@@ -1,3 +1,8 @@
+# Author: Branson Jamanram
+# Description: Python flask code for submitting confidential reviews
+# It calls the function from the model where the author name is hidden and can submit
+
+
 from flask import Blueprint, request
 from models.confidential_review import confidential_review
 
@@ -22,7 +27,7 @@ def submitReview_page():
 
     return message
 
-
+# ** This function has not been implemented yet **
 
 # @submit_confidential_bp.route("/deleteInProgress", methods = ['POST'])
 # def delete_in_Progress_page():

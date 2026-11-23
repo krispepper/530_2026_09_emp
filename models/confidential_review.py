@@ -1,3 +1,8 @@
+# Author: Branson Jamanram
+# Description: This is the code that takes the data in the database and creates functions that 
+# Allow the review to be submitted in full while also hiding the author name
+# And prevents duplicate reviews from being submitted
+
 from datetime import date
 from models.db import Database
 
@@ -64,7 +69,7 @@ class confidential_review:
             return query
 
 
-
+# ** These methods have not be implemented yet **
 
     # If a review is in progress, you are allowed to update the draft
     # @staticmethod
@@ -89,11 +94,4 @@ class confidential_review:
     #         (reviewID, "In Progress"))
 
     #         return "The review has been deleted"
-        
-
-    # # You are not allowed to change submitted reviews       
-    # @staticmethod
-    # def integrity(reviewID, status):
-    #     if reviewID is not None and status == "Submitted":
-    #         return "Submitted reviews cannot be edited"
         

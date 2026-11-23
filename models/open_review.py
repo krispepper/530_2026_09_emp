@@ -55,13 +55,6 @@ class open_review:
 
 # ** These methods have not be implemented yet **#
 
-  
-    # You are not allowed to change submitted reviews       
-    # @staticmethod
-    # def integrity(reviewID, status):
-    #     if reviewID is not None and status == "Submitted":
-    #         return "Submitted reviews cannot be edited"
-        
 
     # @staticmethod
     # def delete(reviewID, status):
