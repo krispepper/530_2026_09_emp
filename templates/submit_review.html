@@ -1,0 +1,98 @@
+<!-- Purpose: This HTML template provides a form for submitting performance reviews. 
+     It includes fields for selecting the employee, review period, review type, and feedback.
+     Author: Cynthia Luizia -->   
+     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Performance Review</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='submit_reviews.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Employee Review Portal</div>
+        <a class="manage-link" href="/dashboard">← Back to dashboard</a>
+    </header>
+
+    <div class="layout">
+        <nav class="sidebar" aria-label="Main navigation">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/periods">Review periods</a>
+            <a class="active" href="/submit-reviews">Submit a review</a>
+        </nav>
+
+        <main>
+            <section class="welcome">
+                <div>
+                    <h1>Submit a performance review</h1>
+                    <p class="subtitle">Complete the form below and choose whether your review is open or confidential.</p>
+                </div>
+            </section>
+
+            <section class="review-form-card">
+                <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+                <form id="reviewForm" method="POST" action="/submitOpen">
+                    <input type="hidden" id="reviewID" name="reviewID" value="">
+                    <input type="hidden" id="status" name="status" value="In Progress">
+
+                    <div class="form-field">
+                        <label for="employeeID">Employee receiving the review</label>
+                        <select id="employeeID" name="employeeID" required>
+                            <option value="">Select an employee</option>
+                            {% for employee in employees %}
+                            <option value="{{ employee.employeeID }}">
+                                {{ employee.firstName }} {{ employee.lastName }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="periodID">Review period</label>
+                        <select id="periodID" name="periodID" required>
+                            <option value="">Select a review period</option>
+                            {% for period in periods %}
+                            <option value="{{ period.period_id }}"
+                                    data-confidential="{{ 'true' if period.is_confidential else 'false' }}">
+                                {{ period.period_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <small>Select a period to load its review type.</small>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="reviewType">Review type</label>
+                        <select id="reviewType" name="reviewType" required>
+                            <option value="open">Open review</option>
+                            <option value="confidential">Confidential review</option>
+                        </select>
+                    </div>
+
+                    <div id="privacyNote" class="privacy-note">
+                        This is an open review and your name will be shown with this review.
+                    </div>
+
+                    <div class="form-field">
+                        <label for="feedback">Performance feedback</label>
+                        <textarea id="feedback" name="feedback" rows="8"
+                                  placeholder="Write your performance feedback here..." required></textarea>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button class="review-action" type="submit" id="submitButton">Submit review</button>
+                        <button class="secondary-button" type="button" id="deleteButton">Clear draft</button>
+                        <a class="cancel-link" href="/dashboard">Cancel</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='submit_reviews.js') }}" defer></script>
+</body>
+</html>

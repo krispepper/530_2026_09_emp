@@ -1,0 +1,59 @@
+<!-- Purpose: Integrity check page - lists submitted reviews as Verified, Tampered or Deleted. -->
+<!-- Author: Maaz Majeed -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Integrity Check</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='integrity.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Employee Review Portal</div>
+        <a class="manage-link" href="/dashboard">← Back to dashboard</a>
+    </header>
+
+    <div class="layout">
+        <nav class="sidebar" aria-label="Main navigation">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/periods">Review periods</a>
+            <a href="/submit-reviews">Submit a review</a>
+            <a class="active" href="/integrity">Integrity check</a>
+        </nav>
+
+        <main>
+            <section class="welcome">
+                <div>
+                    <h1>Review integrity check</h1>
+                    <p class="subtitle">Submitted reviews are fingerprinted. Any change or deletion after submission is flagged here.</p>
+                </div>
+            </section>
+
+            {% if not results %}
+            <p class="integrity-summary">No submitted reviews yet.</p>
+            {% elif problems %}
+            <p class="integrity-summary bad">{{ problems|length }} of {{ results|length }} submitted reviews were changed or deleted after submission.</p>
+            {% else %}
+            <p class="integrity-summary good">All {{ results|length }} submitted reviews are unchanged.</p>
+            {% endif %}
+
+            {% if results %}
+            <table class="integrity-table">
+                <tr><th>Type</th><th>Review ID</th><th>Employee ID</th><th>Submitted</th><th>Status</th></tr>
+                {% for r in results %}
+                <tr>
+                    <td>{{ r.reviewType }}</td>
+                    <td>{{ r.reviewID }}</td>
+                    <td>{{ r.employeeID if r.employeeID is not none else '-' }}</td>
+                    <td>{{ r.submissionDate if r.submissionDate else '-' }}</td>
+                    <td class="status-{{ r.status|lower }}">{{ r.status }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

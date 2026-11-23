@@ -5,7 +5,7 @@
 # Associated with their role
 # Moved into a Blueprint (routes/login_routes.py) so the whole app runs from app.py.
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session
 from models.employee import (get_employees, get_employeesID)
 
 login_bp = Blueprint('login', __name__)
@@ -26,6 +26,16 @@ def login_successful():
     employee = get_employeesID(employeeID)
 
     if employee and employee["role"] == role:
-            return render_template("dashboard.html", employees = employees)
+        
+        session['reviewerID'] = employeeID
+        return render_template("dashboard.html", employees = employees)
+
     else:
         return render_template("login.html", employees = employees)
+
+# Dashboard page: shows the dashboard for the logged-in user
+   
+@login_bp.route("/dashboard")
+def dashboard_page():
+    employees = get_employees()
+    return render_template("dashboard.html", employees = employees)

@@ -1,0 +1,154 @@
+/* Purpose: Styles for the dashboard page. 
+   Author: Cynthia Luizia. */
+:root {
+      --teal: #0f4c5c;
+      --teal-dark: #0b2c35;
+      --teal-light: #e8f1f2;
+      --background: #f4f7f8;
+      --text: #243238;
+      --muted: #68777d;
+      --border: #e1e8ea;
+      --white: #fff;
+      --shadow: 0 8px 24px rgba(15, 44, 53, .08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .topbar {
+      min-height: 76px;
+      padding: 0 5%;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { color: var(--teal); font-size: 20px; font-weight: 700; }
+    .topbar-right { display: flex; align-items: center; gap: 18px; }
+    .search-wrap { position: relative; }
+    .search-wrap input {
+      width: min(320px, 42vw);
+      padding: 11px 14px 11px 38px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      font-size: 14px;
+      outline: none;
+    }
+    .search-wrap input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-light); }
+    .search-icon { position: absolute; left: 14px; top: 9px; color: var(--muted); }
+    .profile-area, .feedback-area { position: relative; }
+    .profile-button, .menu-button {
+      border: 0;
+      cursor: pointer;
+      color: var(--teal);
+      background: var(--teal-light);
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .profile-button:hover, .menu-button:hover { background: #d6e7e9; }
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 52px;
+      z-index: 10;
+      width: 245px;
+      padding: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .dropdown.show { display: block; }
+    .dropdown h3 { margin: 0 0 10px; font-size: 15px; }
+    .dropdown p { margin: 7px 0; color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+    .dropdown a { display: block; padding: 8px 0; color: var(--teal); text-decoration: none; font-size: 14px; }
+    .dropdown a:hover { text-decoration: underline; }
+
+    .layout { display: flex; min-height: calc(100vh - 76px); }
+    .sidebar {
+      width: 225px;
+      flex-shrink: 0;
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 28px 16px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 13px 15px;
+      margin-bottom: 8px;
+      border-radius: 9px;
+      color: #526168;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .sidebar a.active, .sidebar a:hover { background: var(--teal-light); color: var(--teal); font-weight: 700; }
+    main { width: 100%; max-width: 1250px; margin: 0 auto; padding: 38px 5%; }
+    .welcome { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    h1 { margin: 0 0 8px; font-size: 29px; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 15px; }
+    .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin: 28px 0 16px; }
+    h2 { margin: 0; font-size: 19px; }
+    .manage-link { color: var(--teal); text-decoration: none; font-size: 14px; font-weight: 700; }
+    .manage-link:hover { text-decoration: underline; }
+    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
+    .review-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 11px; background: var(--teal-light); color: var(--teal); font-size: 20px; }
+    .tag { padding: 5px 9px; border-radius: 20px; background: #edf3f4; color: var(--teal); font-size: 11px; font-weight: 700; }
+    .review-card h3 { margin: 0 0 8px; font-size: 17px; }
+    .review-card p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 6px 0; }
+    .review-card .deadline { margin: 15px 0; color: var(--text); font-size: 13px; }
+    .review-action {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 22px;
+      background: var(--teal);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .review-action:hover { background: var(--teal-dark); }
+    .empty-state { grid-column: 1 / -1; padding: 25px; border: 1px dashed #bdcdd1; border-radius: 12px; color: var(--muted); text-align: center; background: var(--white); }
+    .feedback-panel { margin-top: 30px; padding: 22px; background: var(--white); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); }
+    .feedback-panel p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .no-results { display: none; margin-top: 15px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 760px) {
+      .topbar { padding: 14px 5%; flex-wrap: wrap; }
+      .topbar-right { width: 100%; justify-content: space-between; }
+      .search-wrap { flex: 1; }
+      .search-wrap input { width: 100%; }
+      .layout { display: block; }
+      .sidebar { width: 100%; display: flex; gap: 6px; padding: 10px 5%; border-right: 0; border-bottom: 1px solid var(--border); }
+      .sidebar a { margin: 0; padding: 10px; }
+      main { padding: 28px 5%; }
+      .welcome { display: block; }
+    }
+/*
+AI Assistance Disclosure:
+Used ChatGPT as a learning resource to understand CSS styling, layout organization and responsive design. 
+
+Prompt Used:
+"Can you explain the differences between Flexbox and CSS Grid and when each should be used? 
+*/
