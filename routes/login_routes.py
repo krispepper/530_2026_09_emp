@@ -32,3 +32,10 @@ def login_successful():
 
     else:
         return render_template("login.html", employees = employees)
+
+# Dashboard page: shows the dashboard for the logged-in user
+   
+@login_bp.route("/dashboard")
+def dashboard_page():
+    employees = get_employees()
+    return render_template("dashboard.html", employees = employees)
