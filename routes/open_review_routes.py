@@ -27,6 +27,9 @@ def submitReview_page():
     
     reviewID = request.form['reviewID']
     reviewerID = session.get('reviewerID')
+    # No reviewer in the session means the user skipped the login page
+    if reviewerID is None:
+        return "Please select your name on the login page first", 401
     employeeID = request.form['employeeID']
     periodID = request.form['periodID']
     feedback = request.form['feedback']
