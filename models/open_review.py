@@ -10,21 +10,21 @@ class open_review:
 
     # Submit an open review in full
     @staticmethod
-    def submit_open(reviewID, employeeID, feedback, status):
+    def submit_open(reviewID, reviewerID, employeeID, periodID, feedback, status):
         # If there is no reviewID then you can submit an open review
 
         if reviewID is None:
 
-            if open_review.duplicate_review(employeeID) == True:
+            if open_review.duplicate_review(reviewerID, employeeID, periodID) == True:
 
                 return "Duplicate reviews are not allowed"
 
             else:
 
                 Database.get_instance().execute(
-                'INSERT INTO SubmitOpenReview (employeeID, feedback, submissionDate, status) '
-                'VALUES (%s, %s, %s, %s)',
-                (employeeID, feedback, date.today(), "Submitted"))
+                'INSERT INTO SubmitOpenReview (reviewerID, employeeID, periodID, feedback, submissionDate, status) '
+                'VALUES (%s, %s, %s, %s, %s, %s)',
+                (reviewerID, employeeID, periodID, feedback, date.today(), "Submitted"))
                 
                 return "Submitted"
 
@@ -34,13 +34,15 @@ class open_review:
 
 
     @staticmethod
-    def duplicate_review(employeeID):
+    def duplicate_review(reviewerID, employeeID, periodID):
             query = Database.get_instance().query(
             'SELECT reviewID '
             'FROM SubmitOpenReview '
-            'WHERE employeeID = %s '
+            'WHERE reviewerID = %s '
+            'AND employeeID = %s '
+            'AND periodID = %s '
             'AND status = %s ',
-            (employeeID, 'Submitted'))
+            (reviewerID, employeeID, periodID, 'Submitted'))
 
             # Cannot return a string otherwise the databse doesnt know if its
             # A duplicate or not

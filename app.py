@@ -11,6 +11,7 @@ from routes.confidential_review_routes import submit_confidential_bp
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = '123'
 app.register_blueprint(login_bp)   # /  and  /login
 app.register_blueprint(period_bp)  # /periods
 app.register_blueprint(submit_open_bp) # /submitOpen
