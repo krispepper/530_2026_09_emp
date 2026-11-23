@@ -33,6 +33,8 @@ class Database:
 
     def __init__(self):
         self._conn = get_connection()
+        # Shared connection must see other users' changes (no stale snapshot between requests)
+        self._conn.autocommit = True
 
     @classmethod
     def get_instance(cls):
