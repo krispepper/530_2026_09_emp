@@ -12,10 +12,11 @@ from routes.integrity_routes import integrity_bp
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = '123'
 app.register_blueprint(login_bp)   # /  and  /login
 app.register_blueprint(period_bp)  # /periods
-app.register_blueprint(submit_open_bp) # /submitOpen and /deleteInProgress
-app.register_blueprint(submit_confidential_bp) # /submitConfidential and /deleteInProgress
+app.register_blueprint(submit_open_bp) # /submitOpen
+app.register_blueprint(submit_confidential_bp) # /submitConfidential
 app.register_blueprint(integrity_bp)  # /integrity
 
 if __name__ == '__main__':
